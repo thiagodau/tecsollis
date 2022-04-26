@@ -22,6 +22,8 @@ ChartJS.register(
 
 import logo from './assets/logo.png'
 
+import './App.css'
+
 function App() {
   /** variaveis globais */
   const totalDiasNoMes = 30;
@@ -39,18 +41,18 @@ function App() {
   const [potenciaInversorMais, setPotenciaInversorMais] = useState(0)
   const [consumoAtendido, setConsumoAtendido] = useState(0)
   /** valor referente a cada Mês */
-  const [janeiro, setJaneiro] = useState(0)
-  const [fevereiro, setFevereiro] = useState(0)
-  const [marco, setMarco] = useState(0)
-  const [abril, setAbril] = useState(0)
-  const [maio, setMaio] = useState(0)
-  const [junho, setJunho] = useState(0)
-  const [julho, setJulho] = useState(0)
-  const [agosto, setAgosto] = useState(0)
-  const [setembro, setSetembro] = useState(0)
-  const [outubro, setOutubro] = useState(0)
-  const [novembro, setNovembro] = useState(0)
-  const [dezembro, setDezembro] = useState(0)
+  const [janeiro, setJaneiro] = useState(5.31)
+  const [fevereiro, setFevereiro] = useState(5.48)
+  const [marco, setMarco] = useState(5.53)
+  const [abril, setAbril] = useState(5.37)
+  const [maio, setMaio] = useState(4.67)
+  const [junho, setJunho] = useState(4.57)
+  const [julho, setJulho] = useState(4.68)
+  const [agosto, setAgosto] = useState(5.40)
+  const [setembro, setSetembro] = useState(5.12)
+  const [outubro, setOutubro] = useState(5.40)
+  const [novembro, setNovembro] = useState(5.59)
+  const [dezembro, setDezembro] = useState(5.68)
   /** Configurações do Gráfico Chart.js2 */
   const options = {
     responsive: true,
@@ -60,7 +62,7 @@ function App() {
       },
       title: {
         display: true,
-        text: 'Consumo Médio Mensal',
+        text: 'Gráfico - Consumo Médio Mensal',
       },
     },
   };
@@ -167,22 +169,24 @@ function App() {
   }
 
   return (
-    <div style={{ margin: '50px' }}>
+    <div className="App">
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <img src={logo} alt="Logomarca" width={'300px'} />
+        <div style={{ width: '500px', background: '#fff', display: 'flex', justifyContent: 'center', borderRadius: '30px' }}>
+          <img src={logo} alt="Logomarca" width={'300px'} />
+        </div>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <div style={{ margin: '10px 20px 0 20px' }}>
-          Consumo Médio Mensal: <input type="number" onChange={(e) => { setConsumoMedioMensal(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px' }} /> kWh
+      <div className="container">
+        <div className="card">
+          Consumo Médio Mensal: <input type="number" onChange={(e) => { setConsumoMedioMensal(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> kWh
           <br />
-          Potência dos Módulos: <input type="number" onChange={(e) => { setPotenciaModulos(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px' }} /> kWh
+          Potência dos Módulos: <input type="number" onChange={(e) => { setPotenciaModulos(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> kWh
           <br />
           Média Diária do Cliente: {mediaDiariaCliente}kWh
           <br />
           Quantidade Necessária de Placas: {Math.floor(quantidadePlacas)} ou {Math.ceil(quantidadePlacas)} placas.
           <br />
-          Placas a Instalar: <input type="number" onChange={(e) => { setQuantidadePlacasInstalar(e.target.valueAsNumber) }} style={{ width: '40px', marginTop: '5px', marginBottom: '5px', padding: '5px' }} />
+          Placas a Instalar: <input type="number" onChange={(e) => { setQuantidadePlacasInstalar(e.target.valueAsNumber) }} style={{ width: '40px', marginTop: '5px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> unidade(s).
           <br />
           Potência Pico Sistema: {potenciaPicoSistema}kWp
           <br />
@@ -196,23 +200,23 @@ function App() {
           Consumo Atendido: {consumoAtendido}%
           <br />
         </div>
-        <div style={{ margin: '10px 20px 0 20px' }}>
-          <p>
-            Dados Informados:
-            <li>Consumo Médio Mensal: {consumoMedioMensal} kWh</li>
-            <li>Potência dos Modulos: {potenciaModulos} kWh</li>
-            <li>Média Diária Cliente: {mediaDiariaCliente} kWh</li>
-            <li>Potência Pico Sistema: {potenciaPicoSistema} kWp</li>
-            <li>Placas a Instalar no Local: {quantidadePlacasInstalar} placas</li>
-            <li>Quantidade Necessaria (p/ -): {Math.floor(quantidadePlacas)} placas ou (p/ +): {Math.ceil(quantidadePlacas)} placas</li>
-            <li>Potência Real: {potenciaReal} kWp</li>
-            <li>Potência do Inversor (menos): {potenciaInversorMenos}K
-              ou (mais): {potenciaInversorMais}K</li>
-            <li>Consumo Atendido: {consumoAtendido}%</li>
-            <li>Produção Mensal Estimada: {Math.ceil(mediaKhwMes())} kWh</li>
-          </p>
+
+        <div className="card">
+          Dados Informados:
+          Consumo Médio Mensal: {consumoMedioMensal} kWh <br />
+          Potência dos Modulos: {potenciaModulos} kWh <br />
+          Média Diária Cliente: {mediaDiariaCliente} kWh <br />
+          Potência Pico Sistema: {potenciaPicoSistema} kWp <br />
+          Placas a Instalar no Local: {quantidadePlacasInstalar} placas <br />
+          Quantidade Necessaria (p/ -): {Math.floor(quantidadePlacas)} placas ou (p/ +): {Math.ceil(quantidadePlacas)} placas <br />
+          Potência Real: {potenciaReal} kWp <br />
+          Potência do Inversor (menos): {potenciaInversorMenos}K
+          ou (mais): {potenciaInversorMais}K <br />
+          Consumo Atendido: {consumoAtendido}% <br />
+          Produção Mensal Estimada: {Math.ceil(mediaKhwMes())} kWh
         </div>
-        <div style={{ margin: '10px 20px 0 20px' }}>
+
+        <div className="card" style={{ display: 'none' }}>
           <table>
             <thead>
               <tr>
@@ -225,66 +229,6 @@ function App() {
                 <td> HSP Aquid.</td>
                 <td> kWh/m</td>
               </tr>
-              <tr>
-                <td> Jan </td>
-                <td> <input type="number" onChange={(e) => { setJaneiro(e.target.valueAsNumber) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(janeiro)}</td>
-              </tr>
-              <tr>
-                <td> Fev </td>
-                <td> <input type="number" onChange={(e) => { setFevereiro((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(fevereiro)}</td>
-              </tr>
-              <tr>
-                <td> Mar </td>
-                <td> <input type="number" onChange={(e) => { setMarco((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(marco)}</td>
-              </tr>
-              <tr>
-                <td> Abr </td>
-                <td> <input type="number" onChange={(e) => { setAbril((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(abril)}</td>
-              </tr>
-              <tr>
-                <td> Mai </td>
-                <td> <input type="number" onChange={(e) => { setMaio((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(maio)}</td>
-              </tr>
-              <tr>
-                <td> Jun </td>
-                <td> <input type="number" onChange={(e) => { setJunho((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(junho)}</td>
-              </tr>
-              <tr>
-                <td> Jul </td>
-                <td> <input type="number" onChange={(e) => { setJulho((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(julho)}</td>
-              </tr>
-              <tr>
-                <td> Ago </td>
-                <td> <input type="number" onChange={(e) => { setAgosto((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(agosto)}</td>
-              </tr>
-              <tr>
-                <td> Set </td>
-                <td> <input type="number" onChange={(e) => { setSetembro((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(setembro)}</td>
-              </tr>
-              <tr>
-                <td> Out </td>
-                <td> <input type="number" onChange={(e) => { setOutubro((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(outubro)}</td>
-              </tr>
-              <tr>
-                <td> Nov </td>
-                <td> <input type="number" onChange={(e) => { setNovembro((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(novembro)}</td>
-              </tr>
-              <tr>
-                <td> Dez </td>
-                <td> <input type="number" onChange={(e) => { setDezembro((e.target.valueAsNumber)) }} style={{ width: '60px' }} /></td>
-                <td> {calculoKwhMes(dezembro)}</td>
-              </tr>
 
               <tr>
                 <td> Média 20º N </td>
@@ -295,15 +239,13 @@ function App() {
             </tbody>
           </table>
         </div>
-      </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '50%', marginTop: '50px' }}>
           < Bar options={options} data={data} />
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div className="container">
         <p style={{ color: '#555' }}>Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5567992817962&text=Ol%C3%A1%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20projeto%20TecSollis%20App." target="_blank" style={{ color: '#555' }}> Thiago.</a></p>
       </div>
     </div >

@@ -1,0 +1,46 @@
+* {
+  font-size: 14px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background: #f6e9f2;
+}
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 300px;
+  min-height: 300px;
+  margin: 15px;
+  padding: 20px 50px;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
+    rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
+}
+
+.card table,
+th,
+td,
+strong,
+input {
+  background: #fff;
+}
+
+.card input {
+  width: 50px;
+  border: 1px solid #f7541a;
+  border-radius: 10px;
+  text-align: center;
+}
