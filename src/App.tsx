@@ -41,6 +41,7 @@ function App() {
   const [potenciaInversorMais, setPotenciaInversorMais] = useState(0)
   const [consumoAtendido, setConsumoAtendido] = useState(0)
   const [azimutal, setAzimutal] = useState('Norte')
+  const [conversaoKwpToKwh, setConversaoKwpToKwh] = useState(0)
   /** valor referente a cada Mês */
   const [janeiro, setJaneiro] = useState(5.31)
   const [fevereiro, setFevereiro] = useState(5.48)
@@ -105,10 +106,10 @@ function App() {
     calculoPotenciaReal(potenciaModulos, quantidadePlacasInstalar)
     calculoPotenciaInversor(quantidadePlacasInstalar, potenciaModulos)
     calculoConsumoAtendido(potenciaReal, potenciaPicoSistema)
-  }, [consumoMedioMensal, potenciaModulos, quantidadePlacasInstalar, potenciaReal, potenciaPicoSistema, azimutal])
+  }, [consumoMedioMensal, potenciaModulos, quantidadePlacasInstalar, potenciaReal, potenciaPicoSistema, azimutal, conversaoKwpToKwh])
 
   function calculoKwhMes(valor: number) {
-    let resultado = ((((valor * 30) * (85 * 100)) / 10000) * potenciaReal)
+    let resultado = ((((valor * totalDiasNoMes) * (85 * 100)) / 10000) * potenciaReal)
     resultado = Number(resultado.toFixed(2))
     return resultado
   }
@@ -170,6 +171,12 @@ function App() {
     setConsumoAtendido(resultado)
   }
 
+  const calculoConversaoKwPtoKwH = (valorParaConverter: number) => {
+    let resultado = ((5.23 * totalDiasNoMes) * valorParaConverter) * ((85) / 100)
+    resultado = Number(resultado.toFixed(2))
+    return resultado
+  }
+
   function mediaKhwMes() {
     let resultado = ((calculoKwhMes(janeiro) +
       calculoKwhMes(fevereiro) +
@@ -224,6 +231,11 @@ function App() {
           <br />
           Consumo Atendido: {consumoAtendido}%
           <br />
+          <input type="number" onChange={(e) => { setConversaoKwpToKwh(e.target.valueAsNumber) }}
+            style={{
+              width: '40px', marginTop: '5px', marginBottom: '5px',
+              padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff'
+            }} /> kWp para {calculoConversaoKwPtoKwH(conversaoKwpToKwh)} kWh.
         </div>
 
         <div className="card">
