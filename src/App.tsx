@@ -204,32 +204,22 @@ function App() {
 
       <div className="container">
         <div className="card">
+          <strong>Dados:</strong>
+          <br />
+          <br />
           Consumo Médio Mensal: <input type="number" onChange={(e) => { setConsumoMedioMensal(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> kWh
           <br />
           Potência dos Módulos: <input type="number" onChange={(e) => { setPotenciaModulos(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> kWh
           <br />
-          Azimutal:<select value={azimutal} onChange={(e) => { setAzimutal(e.target.value) }}>
+          Azimutal: <select value={azimutal} onChange={(e) => { setAzimutal(e.target.value) }}>
             <option value="Norte">Norte</option>
             <option value="Leste">Leste</option>
             <option value="Oeste">Oeste</option>
           </select>
           <br />
-          Média Diária do Cliente: {mediaDiariaCliente}kWh
-          <br />
           Quantidade Necessária de Placas: {Math.floor(quantidadePlacas)} ou {Math.ceil(quantidadePlacas)} placas.
           <br />
           Placas a Instalar: <input type="number" onChange={(e) => { setQuantidadePlacasInstalar(e.target.valueAsNumber) }} style={{ width: '40px', marginTop: '5px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> unidade(s).
-          <br />
-          Potência Pico Sistema: {potenciaPicoSistema}kWp
-          <br />
-          Potência Real: {potenciaReal}kWp
-          <br />
-          Potência do Inversor (menos): {potenciaInversorMenos}K
-          ou (mais): {potenciaInversorMais}K
-          <br />
-          Produção Mensal Estimada: {Math.ceil(mediaKhwMes())} kWh
-          <br />
-          Consumo Atendido: {consumoAtendido}%
           <br />
           <input type="number" onChange={(e) => { setConversaoKwpToKwh(e.target.valueAsNumber) }}
             style={{
@@ -239,20 +229,20 @@ function App() {
         </div>
 
         <div className="card">
-          Dados Informados:
+          <strong>Resultados:</strong>
+          <br />
+          <br />
           Consumo Médio Mensal: {consumoMedioMensal} kWh <br />
           Potência dos Modulos: {potenciaModulos} kWh <br />
           Média Diária Cliente: {mediaDiariaCliente} kWh <br />
           Potência Pico Sistema: {potenciaPicoSistema} kWp <br />
           Placas a Instalar no Local: {quantidadePlacasInstalar} placas <br />
-          Quantidade Necessaria (p/ -): {Math.floor(quantidadePlacas)} placas ou (p/ +): {Math.ceil(quantidadePlacas)} placas <br />
           Potência Real: {potenciaReal} kWp <br />
-          Potência do Inversor (menos): {potenciaInversorMenos}K
-          ou (mais): {potenciaInversorMais}K <br />
+          Potência do Inversor (-): {potenciaInversorMenos}K
+          ou (+): {potenciaInversorMais}K <br />
           Consumo Atendido: {consumoAtendido}% <br />
           Produção Mensal Estimada: {Math.ceil(mediaKhwMes())} kWh
         </div>
-
         <div style={{ width: '50%', marginTop: '50px' }}>
           < Bar options={options} data={data} />
         </div>
