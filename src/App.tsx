@@ -40,6 +40,7 @@ function App() {
   const [potenciaInversorMenos, setPotenciaInversorMenos] = useState(0)
   const [potenciaInversorMais, setPotenciaInversorMais] = useState(0)
   const [consumoAtendido, setConsumoAtendido] = useState(0)
+  const [azimutal, setAzimutal] = useState('Norte')
   /** valor referente a cada Mês */
   const [janeiro, setJaneiro] = useState(5.31)
   const [fevereiro, setFevereiro] = useState(5.48)
@@ -67,9 +68,10 @@ function App() {
     },
   };
 
-  const labels = ['Janeiro', 'Fevereiro', 'Março',
-    'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
-    'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  const labels = ['Jan ' + calculoKwhMes(janeiro), 'Fev ' + calculoKwhMes(fevereiro), 'Mar ' + calculoKwhMes(marco),
+  'Abr ' + calculoKwhMes(abril), 'Mai ' + calculoKwhMes(maio), 'Jun ' + calculoKwhMes(junho), 'Jul ' + calculoKwhMes(julho),
+  'Ago ' + calculoKwhMes(agosto), 'Set ' + calculoKwhMes(setembro), 'Out ' + calculoKwhMes(outubro),
+  'Nov ' + calculoKwhMes(novembro), 'Dez ' + calculoKwhMes(dezembro)];
 
   const data = {
     labels,
@@ -90,7 +92,7 @@ function App() {
           calculoKwhMes(novembro),
           calculoKwhMes(dezembro)
         ],
-        backgroundColor: ['rgba(255, 162, 1, 0.5)'],
+        backgroundColor: ['rgba(255, 162, 1, 0.5)']
       }
     ],
   };
@@ -98,12 +100,12 @@ function App() {
 
   useEffect(() => {
     calculoMediaDiariaCliente(consumoMedioMensal, totalDiasNoMes)
-    calculoPotenciaPicoSistema(consumoMedioMensal, totalDiasNoMes)
+    calculoPotenciaPicoSistema(consumoMedioMensal, totalDiasNoMes, azimutal)
     calculoQuantidadesPlacas(potenciaPicoSistema, potenciaModulos)
     calculoPotenciaReal(potenciaModulos, quantidadePlacasInstalar)
     calculoPotenciaInversor(quantidadePlacasInstalar, potenciaModulos)
     calculoConsumoAtendido(potenciaReal, potenciaPicoSistema)
-  }, [consumoMedioMensal, potenciaModulos, quantidadePlacasInstalar, potenciaReal, potenciaPicoSistema])
+  }, [consumoMedioMensal, potenciaModulos, quantidadePlacasInstalar, potenciaReal, potenciaPicoSistema, azimutal])
 
   function calculoKwhMes(valor: number) {
     let resultado = ((((valor * 30) * (85 * 100)) / 10000) * potenciaReal)
@@ -111,8 +113,25 @@ function App() {
     return resultado
   }
 
-  const calculoPotenciaPicoSistema = (consumoMedioMensal: number, totalDiasNoMes: number) => {
-    let resultado = ((consumoMedioMensal / totalDiasNoMes) / (5.23) * (1.2))
+  const calculoPotenciaPicoSistema = (consumoMedioMensal: number, totalDiasNoMes: number, azimutal: string) => {
+
+    let norte = 1.2;
+    let leste = (1.2) * (1.1);
+    let oeste = (1.2) * (1.2);
+
+    let selecao = norte;
+
+    if (azimutal == 'Norte') {
+      selecao = norte
+    } else if (azimutal == 'Leste') {
+      selecao = leste
+    } else if (azimutal == 'Oeste') {
+      selecao = oeste
+    } else {
+      alert('Algo deu errado no calculo da Potência do Pico do Sistema, atualize a página.')
+    }
+
+    let resultado = ((consumoMedioMensal / totalDiasNoMes) / (5.23) * (selecao))
     resultado = Number(resultado.toFixed(2))
     setPotenciaPicoSistema(resultado)
   }
@@ -146,8 +165,8 @@ function App() {
   }
 
   const calculoConsumoAtendido = (potenciaReal: number, potenciaPicoSistema: number) => {
-    let resultado = ((potenciaReal / potenciaPicoSistema) * 100)
-    resultado = Math.floor(resultado)
+    let resultado = Number(((potenciaReal / potenciaPicoSistema) * 100).toFixed(2))
+    resultado = Math.round(resultado)
     setConsumoAtendido(resultado)
   }
 
@@ -182,6 +201,12 @@ function App() {
           <br />
           Potência dos Módulos: <input type="number" onChange={(e) => { setPotenciaModulos(e.target.valueAsNumber) }} style={{ width: '50px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> kWh
           <br />
+          Azimutal:<select value={azimutal} onChange={(e) => { setAzimutal(e.target.value) }}>
+            <option value="Norte">Norte</option>
+            <option value="Leste">Leste</option>
+            <option value="Oeste">Oeste</option>
+          </select>
+          <br />
           Média Diária do Cliente: {mediaDiariaCliente}kWh
           <br />
           Quantidade Necessária de Placas: {Math.floor(quantidadePlacas)} ou {Math.ceil(quantidadePlacas)} placas.
@@ -214,30 +239,6 @@ function App() {
           ou (mais): {potenciaInversorMais}K <br />
           Consumo Atendido: {consumoAtendido}% <br />
           Produção Mensal Estimada: {Math.ceil(mediaKhwMes())} kWh
-        </div>
-
-        <div className="card" style={{ display: 'none' }}>
-          <table>
-            <thead>
-              <tr>
-                <th> Dados Creceb </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td> Meses</td>
-                <td> HSP Aquid.</td>
-                <td> kWh/m</td>
-              </tr>
-
-              <tr>
-                <td> Média 20º N </td>
-                <td><strong> {((janeiro + fevereiro + marco + abril + maio + junho + julho + agosto + setembro + outubro + novembro + dezembro) / 12).toFixed(2)} </strong></td>
-                <td><strong>{mediaKhwMes().toFixed(2)}</strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
         <div style={{ width: '50%', marginTop: '50px' }}>

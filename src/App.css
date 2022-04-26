@@ -34,7 +34,8 @@ input[type='number'] {
 th,
 td,
 strong,
-input {
+input,
+select {
   background: #fff;
 }
 
@@ -43,4 +44,10 @@ input {
   border: 1px solid #f7541a;
   border-radius: 10px;
   text-align: center;
+}
+
+.card select {
+  margin-bottom: 5px;
+  border: 1px solid #f7541a;
+  border-radius: 10px;
 }
