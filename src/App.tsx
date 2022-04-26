@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -296,13 +297,6 @@ function App() {
         </div>
       </div>
 
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-
-
-
-
-      </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         <div style={{ width: '50%' }}>
           < Bar options={options} data={data} />
