@@ -302,6 +302,10 @@ function App() {
           < Bar options={options} data={data} />
         </div>
       </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <p style={{ color: '#555' }}>Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5567992817962&text=Ol%C3%A1%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20projeto%20TecSollis%20App." target="_blank" style={{ color: '#555' }}> Thiago.</a></p>
+      </div>
     </div >
 
   )
