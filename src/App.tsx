@@ -41,7 +41,7 @@ function App() {
   const [potenciaInversorMais, setPotenciaInversorMais] = useState(0)
   const [consumoAtendido, setConsumoAtendido] = useState(0)
   const [azimutal, setAzimutal] = useState('Norte')
-  const [conversaoKwpToKwh, setConversaoKwpToKwh] = useState(0)
+  const [conversaoKwpToKwh, setConversaoKwpToKwh] = useState('')
   /** valor referente a cada Mês */
   const [janeiro, setJaneiro] = useState(5.31)
   const [fevereiro, setFevereiro] = useState(5.48)
@@ -171,9 +171,9 @@ function App() {
     setConsumoAtendido(resultado)
   }
 
-  const calculoConversaoKwPtoKwH = (valorParaConverter: number) => {
-    let resultado = ((5.23 * totalDiasNoMes) * valorParaConverter) * ((85) / 100)
-    resultado = resultado
+  const calculoConversaoKwPtoKwH = (valorParaConverter: string) => {
+    let valor = parseFloat(valorParaConverter)
+    let resultado = ((5.23 * totalDiasNoMes) * valor) * ((85) / 100)
     return resultado
   }
 
@@ -226,9 +226,7 @@ function App() {
             Placas a Instalar: <input type="number" onChange={(e) => { setQuantidadePlacasInstalar(e.target.valueAsNumber) }} style={{ width: '40px', marginTop: '5px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> unidade(s).
           </p>
           <p>
-            <input type="number" onChange={(e) => {
-              setConversaoKwpToKwh(e.target.valueAsNumber)
-            }}
+            <input type="number" onChange={(e) => { setConversaoKwpToKwh(e.target.value) }}
               style={{
                 width: '40px', marginTop: '5px', marginBottom: '5px',
                 padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff'
