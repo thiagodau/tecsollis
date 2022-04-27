@@ -171,8 +171,9 @@ function App() {
     setConsumoAtendido(resultado)
   }
 
-  const calculoConversaoKwPtoKwH = (valorParaConverter: string) => {
-    let valor = parseFloat(valorParaConverter)
+  const calculoConversaoKwPtoKwH = (valorParaConverter: number) => {
+    let valor = valorParaConverter
+
     let resultado = ((5.23 * totalDiasNoMes) * valor) * ((85) / 100)
     return resultado
   }
@@ -226,11 +227,15 @@ function App() {
             Placas a Instalar: <input type="number" onChange={(e) => { setQuantidadePlacasInstalar(e.target.valueAsNumber) }} style={{ width: '40px', marginTop: '5px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> unidade(s).
           </p>
           <p>
-            <input type="number" onChange={(e) => { setConversaoKwpToKwh(e.target.value) }}
+            <input type="number" onChange={(e) => {
+              if (e.target.value != '') {
+                setConversaoKwpToKwh(e.target.value)
+              }
+            }}
               style={{
                 width: '40px', marginTop: '5px', marginBottom: '5px',
                 padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff'
-              }} /> kWp para {calculoConversaoKwPtoKwH(conversaoKwpToKwh)} kWh.
+              }} /> kWp para {calculoConversaoKwPtoKwH(parseFloat(conversaoKwpToKwh))} kWh.
             {conversaoKwpToKwh}
           </p>
         </div>
