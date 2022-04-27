@@ -17,7 +17,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 import logo from './assets/logo.png'
@@ -271,8 +271,8 @@ function App() {
             Produção Mensal Estimada: {Math.ceil(mediaKhwMes())} kWh
           </p>
         </div>
-        <div style={{ width: '50%', marginTop: '50px' }}>
-          < Bar options={options} data={data} />
+        <div className="graph">
+          <Bar options={options} data={data} />
         </div>
       </div>
 
