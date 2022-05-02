@@ -238,7 +238,6 @@ function App() {
                 width: '40px', marginTop: '5px', marginBottom: '5px',
                 padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff'
               }} /> kWp para {calculoConversaoKwPtoKwH(parseFloat(conversaoKwpToKwh))} kWh.
-            {conversaoKwpToKwh}
           </p>
         </div>
 
