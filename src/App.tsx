@@ -175,6 +175,8 @@ function App() {
     let valor = valorParaConverter
 
     let resultado = ((5.23 * totalDiasNoMes) * valor) * ((85) / 100)
+    console.log(resultado)
+    resultado = Number(resultado.toFixed(2))
     return resultado
   }
 
