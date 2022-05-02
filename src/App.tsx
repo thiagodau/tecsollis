@@ -221,7 +221,7 @@ function App() {
             </select>
           </p>
           <p>
-            Quantidade Necessária de Placas: {Math.floor(quantidadePlacas)} ou {Math.ceil(quantidadePlacas)}.
+            Quantidade Necessária de Placas: <strong style={{ fontSize: '14px' }}>{Math.floor(quantidadePlacas)} ou {Math.ceil(quantidadePlacas)}</strong>.
           </p>
           <p>
             Placas a Instalar: <input type="number" onChange={(e) => { setQuantidadePlacasInstalar(e.target.valueAsNumber) }} style={{ width: '40px', marginTop: '5px', marginBottom: '5px', padding: '5px', border: '1px solid #F7541A', borderRadius: '10px', background: '#fff' }} /> unidade(s).
